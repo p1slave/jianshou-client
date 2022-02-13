@@ -2,7 +2,7 @@ import pytest
 import os
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-from sr.jianshou import JianshouClient
+from src.jianshou import JianshouClient
 
 @pytest.fixture
 def jianshou_client():
