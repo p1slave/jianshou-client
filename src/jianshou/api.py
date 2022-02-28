@@ -205,8 +205,10 @@ class JianshouClient:
 			"_method": "patch",
 			"_token": token,
 			"content": new_content if new_content else self.item_map[hashid].content,
-			"price": str(new_price) if new_price else str(self.item_map[hashid].price),
-			"stock": str(new_stock) if new_stock else str(self.item_map[hashid].stock),
+			# Price an stock cannot be None otherwise the request will fail.
+			"price": str(new_price) if new_price else str(self.item_map[hashid].price or 1),
+			# Note that if 0 equals if false
+			"stock": str(new_stock) if new_stock or new_stock == 0 else str(self.item_map[hashid].stock or 0),
 		}
 
 		res = self.session.post(payinfo_url, data=data)

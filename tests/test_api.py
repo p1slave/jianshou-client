@@ -29,6 +29,7 @@ def test_jianshou_creation_and_deletion(jianshou_client):
 def test_jianshou_baseinfo(jianshou_client):
 	item = jianshou_client.upload(name="new_item", intro='testing', content="testing")
 	hashid = item.hashid
+	assert item.name == "new_item"
 
 	updated_item = jianshou_client.update_baseinfo(hashid, new_name="new_item_updated", new_intro="intro_updated")
 	assert updated_item.name == "new_item_updated"
@@ -37,7 +38,7 @@ def test_jianshou_baseinfo(jianshou_client):
 
 def test_gen_html_snippet(jianshou_client):
 	# Text description followed by external links and images
-	html_snippet = jianshou_client.gen_typical_html_snippet("hello world", 
+	html_snippet = jianshou_client.gen_typical_html_snippet("hello world",
 		other_links=[
 			"https://www.google.com",
 			"https://www.baidu.com",
